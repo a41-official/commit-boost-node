@@ -9,7 +9,7 @@ Download Network Configs to `network-configs/` from Repositories in [Commit-Boos
 ### Geth
 
 ```shell
-docker run --rm -v $PWD/network-configs/genesis.json:/network-configs/genesis.json -v $PWD/data/geth/execution-data:/data/geth/execution-data ethereum/client-go init --datadir=/data/geth/execution-data --state.scheme=hash /network-configs/genesis.json
+docker run --rm -v $PWD/network-configs/genesis.json:/network-configs/genesis.json -v $PWD/data/geth:/data/geth/execution-data ethereum/client-go init --datadir=/data/geth/execution-data --state.scheme=hash /network-configs/genesis.json
 ```
 
 ## Deploy
