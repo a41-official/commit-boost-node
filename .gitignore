@@ -1,0 +1,11 @@
+.key/validator_keys
+.key/web3signer_keys
+.key/wallet
+.key/stakewise
+.key/teku/ssl_keystore_pass.txt
+.env
+data
+jwt
+*.p12
+.DS_Store
+network-configs
