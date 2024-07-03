@@ -82,6 +82,7 @@ services:
       --checkpoint-sync-url=${CC_CHECKPOINT_SYNC_URL:-https://bn.bootnode.helder-devnets.xyz/}
       --execution-endpoint=${CC_EXECUTION_ENDPOINT:-http://execution-client:8561}
       --jwt-secrets=/jwt/jwtsecret
+      --suggested-fee-recipient=${CC_SUGGESTED_FEE_RECIPIENT:-0x0000000000000000000000000000000000000000}
       --debug-level=info
       --http
       --http-address=0.0.0.0
@@ -91,12 +92,27 @@ services:
       --metrics-address=0.0.0.0
       --metrics-port=5054
       --metrics-allow-origin="*"
-      --suggested-fee-recipient=${CC_SUGGESTED_FEE_RECIPIENT:-0x0000000000000000000000000000000000000000}
     networks: [ ethnode ]
     volumes:
       - ./data/lighthouse:/data/lighthouse/beacon-data
       - ./network-configs:/network-configs
       - ./jwt:/jwt
+    restart: unless-stopped
+  
+  validator-client:
+    image: sigp/lighthouse:${LIGHTHOUSE_VERSION:-v5.2.0}
+    ports:
+      - ${VC_PORT_HTTP:-5062}:5062 # Keymanager API
+      - ${VC_PORT_METRICS:-5064}:5064 # Metrics
+    entrypoint: /opt/lighthouse/run.sh
+    environment:
+      VC_BEACON_NODE_ADDRESS: ${VC_BEACON_NODE_ADDRESS:-http://consensus-client:50050}
+      VC_SUGGESTED_FEE_RECIPIENT: ${VC_SUGGESTED_FEE_RECIPIENT:-0x0000000000000000000000000000000000000000}
+      VC_DEFAULT_GRAFFITI: ${VC_DEFAULT_GRAFFITI:-Lighthouse}
+    networks: [ ethnode ]
+    volumes:
+      - ./scripts/lighthouse/run.sh:/opt/lighthouse/run.sh
+      - ./.key/validator_keys:/opt/lighthouse/keys
     restart: unless-stopped
 
 networks:
