@@ -7,7 +7,7 @@ services:
   # | (_| |  __/ |_| | | |
   #  \__, |\___|\__|_| |_|
   #  |___/
-  geth:
+  execution-client:
     image: ethereum/client-go:${GETH_VERSION:-v1.13.13}
     ports:
       - ${EC_PORT_P2P:-30313}:30313/tcp # P2P TCP
@@ -55,7 +55,7 @@ services:
   # | | | (_| | | | | |_| | | | (_) | |_| \__ \  __/
   # |_|_|\__, |_| |_|\__|_| |_|\___/ \__,_|___/\___|
   #      |___/
-  lighthouse:
+  consensus-client:
     image: sigp/lighthouse:${LIGHTHOUSE_VERSION:-v5.2.0}
     ports:
       - ${CC_PORT_P2P:-50050}:50050/tcp # P2P TCP
