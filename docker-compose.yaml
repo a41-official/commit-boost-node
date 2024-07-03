@@ -106,7 +106,7 @@ services:
       - ${VC_PORT_METRICS:-5064}:5064 # Metrics
     entrypoint: /opt/lighthouse/run.sh
     environment:
-      VC_BEACON_NODE_ADDRESS: ${VC_BEACON_NODE_ADDRESS:-http://consensus-client:50050}
+      VC_BEACON_NODE_ADDRESS: ${VC_BEACON_NODE_ADDRESS:-http://consensus-client:4000}
       VC_SUGGESTED_FEE_RECIPIENT: ${VC_SUGGESTED_FEE_RECIPIENT:-0x0000000000000000000000000000000000000000}
       VC_DEFAULT_GRAFFITI: ${VC_DEFAULT_GRAFFITI:-Lighthouse}
     networks: [ ethnode ]
