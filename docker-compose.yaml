@@ -83,6 +83,7 @@ services:
       --execution-endpoint=${CC_EXECUTION_ENDPOINT:-http://execution-client:8561}
       --jwt-secrets=/jwt/jwtsecret
       --suggested-fee-recipient=${CC_SUGGESTED_FEE_RECIPIENT:-0x0000000000000000000000000000000000000000}
+      --builder=${CC_BUILDER_ENDPOINT:-http://localhost:18550}
       --debug-level=info
       --http
       --http-address=0.0.0.0
@@ -98,7 +99,13 @@ services:
       - ./network-configs:/network-configs
       - ./jwt:/jwt
     restart: unless-stopped
-  
+
+  #  _ _       _     _   _
+  # | (_) __ _| |__ | |_| |__   ___  _   _ ___  ___
+  # | | |/ _` | '_ \| __| '_ \ / _ \| | | / __|/ _ \
+  # | | | (_| | | | | |_| | | | (_) | |_| \__ \  __/
+  # |_|_|\__, |_| |_|\__|_| |_|\___/ \__,_|___/\___|
+  #      |___/
   validator-client:
     image: sigp/lighthouse:${LIGHTHOUSE_VERSION:-v5.2.0}
     ports:
