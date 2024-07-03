@@ -113,6 +113,7 @@ services:
     volumes:
       - ./scripts/lighthouse/run.sh:/opt/lighthouse/run.sh
       - ./.key/validator_keys:/opt/lighthouse/keys
+      - ./network-configs:/network-configs
     restart: unless-stopped
 
 networks:

@@ -16,6 +16,7 @@ for f in /opt/lighthouse/keys/keystore-*.json; do
   echo "Importing key ${f}"
 
   lighthouse account validator import \
+    --testnet-dir /network-configs \
     --reuse-password \
     --keystore "${f}" \
     --password-file "${f//json/txt}"
@@ -26,6 +27,7 @@ exec lighthouse validator \
   --beacon-nodes ${VC_BEACON_NODE_ADDRESS} \
   --suggested-fee-recipient "${VC_SUGGESTED_FEE_RECIPIENT}" \
   --builder-proposals \
+  --testnet-dir /network-configs \
   --metrics \
   --metrics-address "0.0.0.0" \
   --metrics-allow-origin "*" \
